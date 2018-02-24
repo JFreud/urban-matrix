@@ -14,8 +14,20 @@ int main() {
   struct matrix *edges;
 
   edges = new_matrix(4, 4);
+  ident(edges);
+  struct matrix *mult_test = new_matrix(4,4);
+  ident(mult_test);
+  print_matrix(edges);
 
-  draw_lines(edges, s, c);
-  display(s);
+  mult_test -> m[0][0] = 30;
+
+  print_matrix(mult_test);
+
+  matrix_mult(edges, mult_test);
+  print_matrix(mult_test);
+
+
+  // draw_lines(edges, s, c);
+  // display(s);
   free_matrix( edges );
 }
