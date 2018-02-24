@@ -17,12 +17,13 @@ void print_matrix(struct matrix *m) {
   while (row_count < m -> rows) {
     col_count = 0;
     while (col_count < m -> cols) {
-      printf("%.2f ", m->m[row_count][col_count]);
+      printf("%.2f\t", m->m[row_count][col_count]);
       col_count++;
     }
     printf("\n");
     row_count++;
   }
+  printf("\n");
 }
 
 /*-------------- void ident() --------------
@@ -61,18 +62,17 @@ a*b -> b
 */
 void matrix_mult(struct matrix *a, struct matrix *b) {
   struct matrix *c = new_matrix(a -> rows, b -> cols);
-  int row,col;
-  int dot;
+  int row,col,dot;
   for (row = 0; row < c -> rows; row++) {
     for (col = 0; col < c -> cols; col++) {
       c -> m[row][col] = 0;
-      for (dot = 0; dot < b -> rows; dot++) { //pieces of dot product
+      for (dot = 0; dot < a -> cols; dot++) { //pieces of dot product
         c -> m[row][col] += a -> m[row][dot] * b -> m[dot][col];
       }
     }
   }
-
   copy_matrix(c, b);
+  free_matrix(c);
 }
 
 
